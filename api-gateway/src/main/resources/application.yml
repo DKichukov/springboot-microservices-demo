@@ -1,3 +1,6 @@
+server:
+  port: 2025
+
 spring:
   cloud:
     gateway:

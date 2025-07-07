@@ -4,6 +4,7 @@ import com.project.dto.EmployeeDto;
 import com.project.model.Employee;
 import com.project.service.EmployeeService;
 import com.project.vo.RestTemplateVO;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,13 @@ public class EmployeeController {
   }
 
   @GetMapping("/findbyid/{empId}")
-  public ResponseEntity<RestTemplateVO> findById(@PathVariable int empId){
+  public ResponseEntity<RestTemplateVO> findById(
+      @Parameter(
+          description = "ID of the employee to retrieve",
+          required = true,
+          example = "1"
+      )
+      @PathVariable int empId) {
     return ResponseEntity.ok(employeeService.findById(empId));
   }
 }
