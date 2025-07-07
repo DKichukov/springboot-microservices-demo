@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: employee-service
+              uri: lb://employee-service
+              predicates:
+                - Path=/api/employees/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: employee-service
+                    fallbackuri: forward:/employeefallback
+
+            - id: department-service
+              uri: lb://department-service
+              predicates:
+                - Path=/api/departments/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: department-service
+                    fallbackuri: forward:/departmentfallback
+
+  main:
+    web-application-type: reactive
