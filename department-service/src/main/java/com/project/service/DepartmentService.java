@@ -11,3 +11,4 @@ public interface DepartmentService {
   Optional<DepartmentDto> findById(int deptId);
 
 }
+
